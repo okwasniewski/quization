@@ -5,14 +5,24 @@ module.exports = {
   ],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+      main:'#1A2980'
+    }
+  },
+    
   },
   variants: {
-    extend: {},
+    extend: {
+      opacity: ['disabled'],
+      scale: ['disabled'],
+      cursor: ['disabled'],
+      backgroundColor: ['disabled'],
+      textColor: ['disabled'],
+    },
   },
   daisyui: {
-    styled: true,
-    themes: ['dark'],
+    themes: ['corporate'],
   },
   plugins: [require('daisyui')],
 };

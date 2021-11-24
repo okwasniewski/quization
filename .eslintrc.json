@@ -3,7 +3,8 @@
   "rules": {
     "no-console": 2,
     "@typescript-eslint/explicit-module-boundary-types": "off",
-    "quotes": [2, "single", { "avoidEscape": true }]
+    "quotes": [2, "single", { "avoidEscape": true }],
+    "no-use-before-define": "off"
   },
   "ignorePatterns": ["*.js"]
 }

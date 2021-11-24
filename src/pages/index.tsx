@@ -1,3 +1,4 @@
+import Button from 'components/Button/Button';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 
@@ -9,6 +10,10 @@ const Home: NextPage = () => (
       <link rel="icon" href="/favicon.ico" />
     </Head>
     <div>
+      <Button label="Test" />
+      <Button label="Test" outline />
+      <Button label="Test" outline disabled />
+      <Button label="Test" disabled />
       <div className="alert alert-success">
         <div className="flex-1" />
       </div>
