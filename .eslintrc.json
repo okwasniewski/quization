@@ -4,5 +4,6 @@
     "no-console": 2,
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "quotes": [2, "single", { "avoidEscape": true }]
-  }
+  },
+  "ignorePatterns": ["*.js"]
 }
