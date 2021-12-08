@@ -20,13 +20,11 @@ function Button({
       type="button"
       disabled={disabled}
       onClick={onClick}
-      className={`px-10 m-2 py-1 rounded-full text-base border-2 border-transparent font-semibold transition-all transform hover:scale-110 disabled:opacity-50 disabled:scale-100 disabled:cursor-not-allowed ${
-        large ? 'text-xl' : ''
-      } ${
-        outline
+      className={`px-10 m-2 py-1 rounded-full text-base border-2 border-transparent font-semibold transition-all transform hover:scale-110 disabled:opacity-50 disabled:scale-100 disabled:cursor-not-allowed ${large ? 'text-xl' : ''
+        } ${outline
           ? 'border-main border-2 text-main hover:bg-main hover:text-white disabled:bg-white disabled:text-main'
           : 'bg-main text-white'
-      }`}
+        }`}
     >
       {label}
     </button>

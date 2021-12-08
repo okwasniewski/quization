@@ -1,12 +1,5 @@
 import React from 'react';
-
-interface InputProps {
-    type: React.HTMLInputTypeAttribute;
-    value: string | number;
-    required?: boolean;
-    placeholder?: string;
-    onChange: React.ChangeEventHandler<HTMLInputElement>;
-}
+import { InputProps } from './Input.model';
 
 function Input({ type, value, placeholder, required, onChange }: InputProps) {
     return (
