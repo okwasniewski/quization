@@ -1,4 +1,5 @@
 # Quization 👨🏻‍🏫
+Projekt graficzny: https://www.figma.com/file/af0yaUzP5oLrMGAFCTX0cx/Quization?node-id=3%3A4311
 
 Temat projektu: Aplikacja internetowa do badania kompetencji cyfrowych
 
