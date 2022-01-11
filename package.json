@@ -11,7 +11,8 @@
     "storybook": "start-storybook -p 6006 -s ./public",
     "build-css": "postcss ./src/styles/style.css -o ./stories/assets/app.css",
     "build-storybook": "build-storybook -s ./public",
-    "chromatic": "npx chromatic --project-token=CHROMATIC_PROJECT_TOKEN"
+    "chromatic": "npx chromatic --project-token=CHROMATIC_PROJECT_TOKEN",
+    "prepare": "husky install"
   },
   "dependencies": {
     "daisyui": "^1.16.1",
@@ -52,6 +53,7 @@
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.26.1",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "husky": "^7.0.4",
     "postcss": "^8.3.11",
     "prettier": "^2.4.1",
     "typescript": "^4.4.4",
