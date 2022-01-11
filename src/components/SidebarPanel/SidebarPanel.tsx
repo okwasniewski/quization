@@ -11,7 +11,7 @@ interface SidebarPanelProps {
 function SidebarPanel({ children, userName, avatarImage }: SidebarPanelProps) {
   return (
     <div className="relative min-h-screen md:flex">
-      <div className="bg-blue-900 text-white w-screen space-y-6 py-0 overflow-hidden h-26 bottom-0 top-auto absolute inset-y-0 left-0 transform md:relative md:translate-x-0 md:w-56 md:h-screen md:py-7">
+      <div className="bg-blue-900 text-white fixed w-screen space-y-6 pb-7 pt-5 overflow-hidden h-26 bottom-0 top-auto  inset-y-0 left-0 transform md:translate-x-0 md:w-56 md:h-screen md:py-7">
         <div className="text-center mb-6 hidden md:block">
           <div>
             <Image
@@ -33,7 +33,7 @@ function SidebarPanel({ children, userName, avatarImage }: SidebarPanelProps) {
         </nav>
       </div>
 
-      <div className="flex-1 p-10" style={{ backgroundColor: '#F6F5FA' }}>
+      <div className="md:pl-56 flex-1" style={{ backgroundColor: '#F6F5FA' }}>
         {children}
       </div>
     </div>
