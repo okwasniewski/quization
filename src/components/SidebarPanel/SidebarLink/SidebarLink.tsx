@@ -20,7 +20,7 @@ function SidebarLink({ link, image, name }: SidebarLinkProps) {
         }`}
       >
         <Image src={image} alt={name} width={20} height={20} />
-        <span className="px-2 hidden md:block"> {name}</span>
+        <span className="px-2 hidden md:block">{name}</span>
       </a>
     </Link>
   );
