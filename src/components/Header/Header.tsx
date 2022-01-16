@@ -21,26 +21,21 @@ const Header = ({ authorized }: HeaderProps) => {
           </Link>
         </div>
         <div className="block md:hidden">
-          <Button
-            label="Zaloguj się"
-            outline
-            onClick={() => router.push('/login')}
-          />
+          <Button outline onClick={() => router.push('/login')}>
+            Zaloguj się
+          </Button>
         </div>
         <div className="md:block hidden">
           {authorized ? (
             <></>
           ) : (
             <>
-              <Button
-                label="Zaloguj się"
-                outline
-                onClick={() => router.push('/login')}
-              />
-              <Button
-                label="Rejestracja"
-                onClick={() => router.push('/register')}
-              />
+              <Button outline onClick={() => router.push('/login')}>
+                Zaloguj się
+              </Button>
+              <Button onClick={() => router.push('/register')}>
+                Zarejestruj się
+              </Button>
             </>
           )}
         </div>

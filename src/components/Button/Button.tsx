@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface ButtonProps {
-  label: string;
+  children: React.ReactNode;
   onClick: () => void;
   outline?: boolean;
   disabled?: boolean;
@@ -9,7 +9,7 @@ interface ButtonProps {
 }
 
 function Button({
-  label,
+  children,
   onClick,
   outline = false,
   disabled = false,
@@ -28,7 +28,7 @@ function Button({
           : 'bg-main text-white'
       }`}
     >
-      {label}
+      {children}
     </button>
   );
 }
