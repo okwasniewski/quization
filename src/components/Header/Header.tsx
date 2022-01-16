@@ -29,14 +29,14 @@ const Header = ({ authorized }: HeaderProps) => {
           {authorized ? (
             <></>
           ) : (
-            <>
+            <div className="flex">
               <Button outline onClick={() => router.push('/login')}>
                 Zaloguj się
               </Button>
               <Button onClick={() => router.push('/register')}>
                 Zarejestruj się
               </Button>
-            </>
+            </div>
           )}
         </div>
       </div>
