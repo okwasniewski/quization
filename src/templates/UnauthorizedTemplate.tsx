@@ -1,4 +1,5 @@
 import Header from 'components/Header/Header';
+import Footer from 'components/Footer/Footer';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 
@@ -21,7 +22,8 @@ const UnauthorizedTemplate: NextPage<UnauthorizedTemplateProps> = ({
       <link rel="icon" href="/favicon.ico" />
     </Head>
     <Header authorized={false} />
-    <div className="mx-auto container p-10">{children}</div>
+    <div className="container p-10 mx-auto">{children}</div>
+    <Footer />
   </>
 );
 
