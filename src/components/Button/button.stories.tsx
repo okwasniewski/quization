@@ -17,10 +17,11 @@ export const ButtonStory = ({
   large: boolean;
 }) => (
   <Button
-    label={label}
     outline={outline}
     disabled={disabled}
     large={large}
     onClick={() => {}}
-  />
+  >
+    {label}
+  </Button>
 );

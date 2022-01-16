@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface ButtonProps {
-  label: string;
+  children: React.ReactNode;
   onClick: () => void;
   outline?: boolean;
   disabled?: boolean;
@@ -9,7 +9,7 @@ interface ButtonProps {
 }
 
 function Button({
-  label,
+  children,
   onClick,
   outline = false,
   disabled = false,
@@ -20,7 +20,7 @@ function Button({
       type="button"
       disabled={disabled}
       onClick={onClick}
-      className={`px-10 m-2 py-1 rounded-full text-base border-2 border-transparent font-semibold transition-all transform hover:scale-110 disabled:opacity-50 disabled:scale-100 disabled:cursor-not-allowed ${
+      className={`px-10 m-2 py-1 items-center justify-center flex rounded-full text-base border-2 border-transparent font-semibold transition-all transform hover:scale-110 disabled:opacity-50 disabled:scale-100 disabled:cursor-not-allowed ${
         large ? 'text-xl' : ''
       } ${
         outline
@@ -28,7 +28,7 @@ function Button({
           : 'bg-main text-white'
       }`}
     >
-      {label}
+      {children}
     </button>
   );
 }
