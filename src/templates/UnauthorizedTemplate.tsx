@@ -22,7 +22,7 @@ const UnauthorizedTemplate: NextPage<UnauthorizedTemplateProps> = ({
       <link rel="icon" href="/favicon.ico" />
     </Head>
     <Header authorized={false} />
-    <div className="container p-10 mx-auto">{children}</div>
+    <div className="container min-h-screen p-10 mx-auto">{children}</div>
     <Footer />
   </>
 );
