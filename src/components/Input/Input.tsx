@@ -9,7 +9,7 @@ function Input({ type, value, placeholder, required, onChange }: InputProps) {
       required={required}
       placeholder={placeholder}
       onChange={onChange}
-      className="p-2 px-5 py-1 m-2 text-md font-semibold text-gray-500 bg-white border-2 rounded-full border-main"
+      className="p-2 px-5 py-2 m-2 text-md font-semibold text-gray-500 bg-white border-2 rounded-full border-main"
     />
   );
 }
