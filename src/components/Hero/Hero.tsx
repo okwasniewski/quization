@@ -2,8 +2,12 @@ import React from 'react';
 
 const Hero = () => (
   <div
-    className="rounded-2xl h-auto w-auto"
-    style={{ backgroundImage: "url('../../assets/Hero.png')" }}
+    className=" rounded-3xl h-auto w-auto"
+    style={{
+      backgroundImage: "url('Hero.png')",
+      backgroundRepeat: 'no-repeat',
+      backgroundSize: 'cover',
+    }}
   >
     <div className="px-5 pb-12 text-center lg:pl-12 pt-36 lg:text-left">
       <h1 className="text-xl font-bold text-white lg:text-3xl">
