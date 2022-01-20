@@ -1,11 +1,11 @@
 module.exports = {
-  mode: 'jit',
-  purge: ['./src/**/*.{js,ts,jsx,tsx}'],
+  mode: "jit",
+  purge: ["./src/**/*.{js,ts,jsx,tsx}"],
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
       colors: {
-        main: '#1A2980',
+        main: "#1A2980",
       },
     },
   },
@@ -13,7 +13,7 @@ module.exports = {
     extend: {},
   },
   daisyui: {
-    themes: ['corporate'],
+    themes: ["corporate"],
   },
-  plugins: [require('daisyui')],
+  plugins: [require("daisyui")],
 };
