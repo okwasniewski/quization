@@ -1,3 +1,4 @@
+import Hero from 'components/Hero/Hero';
 import GridItem from 'components/GridItem/GridItem';
 import type { NextPage } from 'next';
 import UnauthorizedTemplate from 'templates/UnauthorizedTemplate';
@@ -8,6 +9,13 @@ const Home: NextPage = () => (
     title="Strona główna"
     description="Strona główna Quizaiton"
   >
+    <Hero
+      backgroundImage="Hero.png"
+      title="Europejskie ramy kompetencji cyfrowych"
+      subtitle={`Kompetencje cyfrowe, obok czytania, pisania, umiejętności matematycznych
+        i językowych, stanowią zespół fundamentalnych umiejętności
+        współczesnego człowieka.`}
+    />
     <div className="grid grid-auto gap-7">
       {gridData.map(({ imageAlt, imagePath, subtitle, title }) => (
         <GridItem
