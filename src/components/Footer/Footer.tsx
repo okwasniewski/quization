@@ -1,10 +1,18 @@
 import React from 'react';
 import Quization from 'assets/Quization.svg';
+import WiZut from 'assets/WIZUT.svg';
 import Link from 'next/link';
-import Image from 'next/image';
 
-const Footer = () => (
-  <footer className="p-3 mb-20 bg-white shadow-md navbar md:mb-0">
+interface FooterProps {
+  authorized?: boolean;
+}
+
+const Footer = ({ authorized = false }: FooterProps) => (
+  <footer
+    className={`p-3 ${
+      authorized ? 'mb-20' : 'mb-0'
+    } bg-white shadow-md navbar md:mb-0`}
+  >
     <div className="container mx-auto h-18">
       <div>
         <Link href="/" passHref>
@@ -13,16 +21,10 @@ const Footer = () => (
           </a>
         </Link>
       </div>
-      <div>
+      <div className="flex">
         <Link href="https://www.wi.zut.edu.pl/pl/" passHref>
-          <a>
-            <Image
-              src="/WIZUT.svg"
-              alt="avatar"
-              width={150}
-              height={50}
-              className=""
-            />
+          <a className="pl-3">
+            <WiZut className="w-28 pl-3 h-16" />
           </a>
         </Link>
       </div>

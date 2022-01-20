@@ -24,7 +24,7 @@ const AuthorizedTemplate: NextPage<AuthorizedTemplateProps> = ({
     <SidebarPanel userName="Jan Kowalski">
       <Header authorized />
       <div className="container p-10 mx-auto">{children}</div>
-      <Footer />
+      <Footer authorized />
     </SidebarPanel>
   </>
 );
