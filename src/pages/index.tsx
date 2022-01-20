@@ -1,3 +1,4 @@
+import Hero from 'components/Hero/Hero';
 import type { NextPage } from 'next';
 import UnauthorizedTemplate from 'templates/UnauthorizedTemplate';
 
@@ -6,7 +7,13 @@ const Home: NextPage = () => (
     title="Strona główna"
     description="Strona główna Quizaiton"
   >
-    <h1>Test</h1>
+    <Hero
+      backgroundImage="Hero.png"
+      title="Europejskie ramy kompetencji cyfrowych"
+      subtitle={`Kompetencje cyfrowe, obok czytania, pisania, umiejętności matematycznych
+        i językowych, stanowią zespół fundamentalnych umiejętności
+        współczesnego człowieka.`}
+    />
   </UnauthorizedTemplate>
 );
 

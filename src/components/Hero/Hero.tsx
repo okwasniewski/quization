@@ -1,23 +1,22 @@
 import React from 'react';
 
-const Hero = () => (
+interface HeroProps {
+  backgroundImage: string;
+  title: string;
+  subtitle: string;
+}
+
+const Hero = ({ backgroundImage, subtitle, title }: HeroProps) => (
   <div
-    className=" rounded-3xl h-auto w-auto"
+    className="rounded-3xl h-auto shadow-xl w-auto bg-no-repeat bg-cover items-end flex"
     style={{
-      backgroundImage: "url('Hero.png')",
-      backgroundRepeat: 'no-repeat',
-      backgroundSize: 'cover',
+      minHeight: 500,
+      backgroundImage: `url('${backgroundImage}')`,
     }}
   >
     <div className="px-5 pb-12 text-center lg:pl-12 pt-36 lg:text-left">
-      <h1 className="text-xl font-bold text-white lg:text-3xl">
-        Europejskie ramy kompetencji cyfrowych
-      </h1>
-      <p className="pt-2 text-base text-white lg:text-xl">
-        Kompetencje cyfrowe, obok czytania, pisania, umiejętności matematycznych
-        i językowych, <br /> stanowią zespół fundamentalnych umiejętności
-        współczesnego człowieka.
-      </p>
+      <h1 className="text-xl font-bold text-white lg:text-3xl">{title}</h1>
+      <p className="pt-2 text-base text-white lg:text-xl w-1/2">{subtitle}</p>
     </div>
   </div>
 );
