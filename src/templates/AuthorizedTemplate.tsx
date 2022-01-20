@@ -1,4 +1,5 @@
 import Header from 'components/Header/Header';
+import Footer from 'components/Footer/Footer';
 import SidebarPanel from 'components/SidebarPanel/SidebarPanel';
 import type { NextPage } from 'next';
 import Head from 'next/head';
@@ -22,7 +23,8 @@ const AuthorizedTemplate: NextPage<AuthorizedTemplateProps> = ({
     </Head>
     <SidebarPanel userName="Jan Kowalski">
       <Header authorized />
-      <div className="mx-auto container p-10">{children}</div>
+      <div className="container p-10 mx-auto">{children}</div>
+      <Footer authorized />
     </SidebarPanel>
   </>
 );
