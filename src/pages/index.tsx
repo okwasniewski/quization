@@ -1,6 +1,7 @@
 import GridItem from 'components/GridItem/GridItem';
 import type { NextPage } from 'next';
 import UnauthorizedTemplate from 'templates/UnauthorizedTemplate';
+import { gridData } from 'data/front-page-grid.json';
 
 const Home: NextPage = () => (
   <UnauthorizedTemplate
@@ -8,24 +9,14 @@ const Home: NextPage = () => (
     description="Strona główna Quizaiton"
   >
     <div className="grid grid-auto gap-7">
-      <GridItem
-        image="/information.svg"
-        imageAlt="Security"
-        heading="Informacja i dane"
-        content="identyfikacja, lokalizacja, pobieranie, przechowywanie, organizacja i analiza informacji cyfrowych, zdolność oceny ich wartości, znaczenia i celu"
-      />
-      <GridItem
-        image="/security.svg"
-        imageAlt="Security"
-        heading="Informacja i dane"
-        content="identyfikacja, lokalizacja, pobieranie, przechowywanie, organizacja i analiza informacji cyfrowych, zdolność oceny ich wartości, znaczenia i celu"
-      />
-      <GridItem
-        image="/security.svg"
-        imageAlt="Security"
-        heading="Informacja i dane"
-        content="identyfikacja, lokalizacja, pobieranie, przechowywanie, organizacja i analiza informacji cyfrowych, zdolność oceny ich wartości, znaczenia i celu"
-      />
+      {gridData.map(({ imageAlt, imagePath, subtitle, title }) => (
+        <GridItem
+          image={imagePath}
+          imageAlt={imageAlt}
+          heading={title}
+          content={subtitle}
+        />
+      ))}
     </div>
   </UnauthorizedTemplate>
 );

@@ -15,7 +15,7 @@ const GridItem = ({ image, heading, content, imageAlt }: GridItemProps) => (
         src={image}
         alt={imageAlt}
         className="rounded-xl"
-        width={220}
+        width={200}
         height={150}
       />
     </figure>
