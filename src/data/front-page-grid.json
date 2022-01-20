@@ -1,0 +1,34 @@
+{
+    "gridData": [
+        {
+            "title": "Informacja i dane",
+            "subtitle": "identyfikacja, lokalizacja, pobieranie, przechowywanie, organizacja i analiza informacji cyfrowych, zdolność oceny ich wartości, znaczenia i celu",
+            "imagePath": "/information.svg",
+            "imageAlt": "Info"
+        },
+        {
+            "title": "Komunikacja i współpraca",
+            "subtitle": "komunikacja w środowiskach cyfrowych, udostępnianie zasobów za pomocą narzędzi internetowych, łączenie i kontakt z innymi, współpraca za pośrednictwem narzędzi cyfrowych, interakcja i uczestnictwo w działaniach społecznościowych i sieciach, świadomość międzykulturowa",
+            "imagePath": "/teamGoals.svg",
+            "imageAlt": "Teamwork"
+        },
+        {
+            "title": "Tworzenie treści cyfrowych",
+            "subtitle": "Tworzenie i edytowanie nowych treści; integracja i ponowne przetwarzanie dotychczasowej wiedzy i treści; tworzenie nowych pojęć, treści cyfrowych i programowanie; rozumienie, poszanowanie i stosowanie prawa własności intelektualnej i licencji.",
+            "imagePath": "/typing.svg",
+            "imageAlt": "Computer"
+        },
+        {
+            "title": "Bezpieczeństwo",
+            "subtitle": "ochrona osobista, ochrona danych, ochrona tożsamości cyfrowej, środki bezpieczeństwa, bezpieczne i zrównoważone użytkowanie",
+            "imagePath": "/security.svg",
+            "imageAlt": "Computer"
+        },
+        {
+            "title": "Rozwiązywanie problemów",
+            "subtitle": "identyfikacja potrzeb i zasobów cyfrowych, podejmowanie świadomych decyzji, co do wyboru odpowiednich narzędzi cyfrowych w zależności od celów i potrzeb",
+            "imagePath": "/problemSolving.svg",
+            "imageAlt": "Computer"
+        }
+    ]
+}
