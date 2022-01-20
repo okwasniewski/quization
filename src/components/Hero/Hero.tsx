@@ -15,8 +15,12 @@ const Hero = ({ backgroundImage, subtitle, title }: HeroProps) => (
     }}
   >
     <div className="px-5 pb-12 text-center lg:pl-12 pt-36 lg:text-left">
-      <h1 className="text-xl font-bold text-white lg:text-3xl">{title}</h1>
-      <p className="pt-2 text-base text-white lg:text-xl w-1/2">{subtitle}</p>
+      <h1 className="text-xl font-bold text-white lg:text-3xl text-left">
+        {title}
+      </h1>
+      <p className="pt-2 text-base text-white lg:text-xl w-full lg:w-1/2 text-left">
+        {subtitle}
+      </p>
     </div>
   </div>
 );
