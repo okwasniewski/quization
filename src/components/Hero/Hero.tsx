@@ -8,7 +8,7 @@ interface HeroProps {
 
 const Hero = ({ backgroundImage, subtitle, title }: HeroProps) => (
   <div
-    className="rounded-3xl h-auto shadow-xl w-auto bg-no-repeat bg-cover items-end flex"
+    className="rounded-3xl h-auto shadow-xl w-auto bg-no-repeat bg-cover items-end flex mb-14"
     style={{
       minHeight: 500,
       backgroundImage: `url('${backgroundImage}')`,
