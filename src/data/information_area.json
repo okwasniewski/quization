@@ -1,0 +1,103 @@
+{
+    "exam_title": "OBSZAR INFORMACJA",
+        "questions": [
+            {
+                "number": 1,
+                "questionType": "checkbox",
+                "title": "Co to jest wyszukiwarka sieciowa?",
+                "answers": ["Program wykrywający podłączenie komputera do sieci LAN", "Program wyszukujący zasoby sieciowe według podanych słów kluczowych ", "Program do przeglądania zawartości stron WWW"],
+                "correctAnswer": 1
+            },
+            {
+                "number": 2,
+                "questionType": "checkbox",
+                "title": "Który z wymienionych programów jest niezbędny do przeglądania zawartości stron WWW",
+                "answers": ["wyszukiwarka internetowa"," klient pocztowy ", "komunikator internetowy", "przeglądarka internetowa"],
+                "correctAnswer": 3
+            },
+            {
+                "number": 3,
+                "questionType": "checkbox",
+                "title": "Popularna przeglądarka stron internetowych z liskiem w logo to",
+                "answers": ["Internet Explorer ", "Opera", "Safari", "Firefox"],
+                "correctAnswer": 3
+            },
+            {
+                "number": 4,
+                "questionType": "checkbox",
+                "title": "Przeglądarką nie jest",
+                "answers": ["Mozilla Firefox", "Google Chrome", "Microsoft Edge", "Skype"],
+                "correctAnswer": 3
+            },
+            {
+                "number": 5,
+                "questionType": "checkbox",
+                "title": "Pliki o nazwach a.xls, b.jpg, c.txt, d.mp3 to pliki (w kolejności):",
+                "answers": ["graficzny, tekstowy, arkusza kalkulacyjnego, plik wykonywalny", "bazy danych, arkusza kalkulacyjnego, graficzny, muzyczny", "arkusza kalkulacyjnego, graficzny, tekstowy, muzyczny", "graficzny, tekstowy, muzyczny, arkusza kalkulacyjnego "],
+                "correctAnswer": 2
+            },
+            {
+                "number": 6,
+                "questionType": "checkbox",
+                "title": "Kompresja pliku powoduje:",
+                "answers": ["przesunięcie plików do folderu Pliki usunięte", "usunięcie kompresowanych plików do Kosza", "zmniejszenie rozmiaru plików ", "zwiększenie rozmiaru plików"],
+                "correctAnswer": 2
+            },
+            {
+                "number": 7,
+                "questionType": "checkbox",
+                "title": "Która z podanych poniżej czynności powoduje anulowanie drukowania dokumentu?",
+                "answers": ["wstrzymaj drukowanie dokumentu", "anuluj drukowanie dokumentu ", "zamknięcie okna aplikacji drukującej dokument", "usunięcie drukowanego pliku"],
+                "correctAnswer": 1
+            },
+            {
+                "number": 8,
+                "questionType": "checkbox",
+                "title": "Po opróżnieniu kosza, pliki w nim znajdujące się:",
+                "answers": ["zostają trwale usunięte z nośnika danych", "następuje zmiana nazw plików i przesunięcie ich do folderu Tymczasowe", "pliki zostają przenoszone do pierwotnej lokalizacji", "następuje zmiana rozszerzenia nazw plików na *.tmp."],
+                "correctAnswer": 0
+            },
+            {
+                "number": 9,
+                "questionType": "checkbox",
+                "title": "W przypadku zawieszenia pracy aplikacji, należy:",
+                "answers": ["kombinacja klawiszy CRTL + ALT + DELETE uruchomić Menedżera zadań i zakończyć pracę aplikacji", "kombinacja klawiszy CRTL + ALT + DELETE zrestartować komputer", "wyłączyć komputer odłączając zasilanie ", "ponownie uruchomić zawieszoną aplikację "],
+                "correctAnswer": 0
+            },
+            {
+                "number": 10,
+                "questionType": "checkbox",
+                "title": "Aplikacja WordPad to:",
+                "answers": ["program graficzny", "arkusz kalkulacyjny", "baza danych", "edytor tekstu"],
+                "correctAnswer": 3
+            },
+            {
+                "number": 11,
+                "questionType": "checkbox",
+                "title": "Jakich cyfr używa do zapisu system dwójkowy?",
+                "answers": ["0 i 1", "od 0 do 9", "0 i 9", "od 0 do 10"],
+                "correctAnswer": 0
+            },
+            {
+                "number": 12,
+                "questionType": "checkbox",
+                "title": "Pendrive jest to:",
+                "answers": ["pamięć wewnętrzna komputera", "pamięć umożliwiająca rozruch poszczególnych podzespołów komputera", "zewnętrzna pamięć dyskowa służąca do zapisu przechowywania i odczytu danych z możliwością kasowania"],
+                "correctAnswer": 2
+            },
+            {
+                "number": 13,
+                "questionType": "checkbox",
+                "title": "Katalog to inaczej:",
+                "answers": ["plik", "folder", "skrót", "program"],
+                "correctAnswer": 1
+            },
+            {
+                "number": 14,
+                "questionType": "checkbox",
+                "title": "Skrót klawiaturowy Ctrl + C służy do:",
+                "answers": ["cofania ostatniej czynności", "kopiowania zaznaczonego obiektu lub fragmentu tekstu do schowka", "powtórzenia czynności"],
+                "correctAnswer": 3
+            }
+        ]
+}
