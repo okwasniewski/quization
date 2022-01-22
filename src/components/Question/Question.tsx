@@ -1,16 +1,17 @@
 import Button from 'components/Button/Button';
-import Input from 'components/Input/Input';
 import React, { useState } from 'react';
 
 interface QuestionProps {
-  question: string;
-  questionType: 'input' | 'select';
+  question?: string;
+  htmlQuestion?: string;
+  questionType: 'input' | 'select' | 'images';
   options?: string[];
 }
 
 function Question({
   question,
   questionType = 'input',
+  htmlQuestion,
   options,
 }: QuestionProps) {
   const [inputAnswer, setInputAnser] = useState('');
@@ -21,25 +22,30 @@ function Question({
 
   return (
     <div className="max-w-sm overflow-hidden shadow-lg py-8 px-4 bg-white rounded-xl min-w-full text-center my-4">
-      <h2 className="font-bold text-2xl mb-6">{question}</h2>
-      {questionType === 'input' && (
-        <Input
-          type="text"
-          value={inputAnswer}
-          placeholder="Podaj odpowiedź"
-          onChange={inputHandler}
-        />
-      )}
-      {questionType === 'select' &&
+      <h2 className="font-bold text-2xl mb-6">
+        {htmlQuestion ? (
+          <span dangerouslySetInnerHTML={{ __html: htmlQuestion }} />
+        ) : (
+          question
+        )}
+      </h2>
+      {}
+      {(questionType === 'select' || questionType === 'images') &&
         options?.map((option, index) => (
           <div key={index} className="form-control max-w-lg m-auto">
             <label className="cursor-pointer label">
-              <span className="label-text">{option}</span>
+              <span className="label-text">
+                {questionType === 'images' ? (
+                  <img style={{ width: '160px' }} src={option} alt="option" />
+                ) : (
+                  option
+                )}
+              </span>
               <input
                 type="radio"
                 name="answer"
                 className="radio"
-                value={option}
+                value={questionType === 'images' ? index : option}
               />
             </label>
           </div>
