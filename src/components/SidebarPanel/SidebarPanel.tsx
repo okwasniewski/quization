@@ -33,7 +33,11 @@ function SidebarPanel({ children, userName, avatarImage }: SidebarPanelProps) {
             name="Certyfikaty"
           />
           <SidebarLink link="/profile" image="/profile.svg" name="Profil" />
-          <SidebarLink link="/5" image="/settings.svg" name="Ustawienia" />
+          <SidebarLink
+            link="/settings"
+            image="/settings.svg"
+            name="Ustawienia"
+          />
         </nav>
       </div>
 
