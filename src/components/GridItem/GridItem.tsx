@@ -6,10 +6,28 @@ interface GridItemProps {
   imageAlt: string;
   heading: string;
   content: string;
+  type?: 'active' | 'disabled' | 'neutral';
+  badgeText?: string;
 }
 
-const GridItem = ({ image, heading, content, imageAlt }: GridItemProps) => (
-  <div className="text-center shadow-2xl card">
+const GridItem = ({
+  image,
+  heading,
+  content,
+  imageAlt,
+  badgeText,
+  type = 'neutral',
+}: GridItemProps) => (
+  <div
+    className={`text-center shadow-2xl card ${
+      type === 'disabled' ? 'grayscale shadow-md' : ''
+    } ${type === 'active' ? 'border-green-300 border-2' : ''}`}
+  >
+    {type === 'active' && badgeText && (
+      <div className="absolute bg-green-300 p-2 right-0 rounded-bl-md">
+        {badgeText}
+      </div>
+    )}
     <figure className="px-10 pt-10">
       <Image
         src={image}
