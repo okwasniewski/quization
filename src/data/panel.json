@@ -1,0 +1,28 @@
+{
+    "data": [{
+            "title": "Informacje i dane",
+            "description": "identyfikacja, lokalizacja, pobieranie, przechowywanie, organizacja i analiza informacji cyfrowych, zdolność oceny ich wartości, znaczenia i celu",
+            "background": "data.jpg"
+        },
+        {
+            "title": "Komunikacja i współpraca",
+            "description": "komunikacja w środowiskach cyfrowych, udostępnianie zasobów za pomocą narzędzi internetowych, łączenie i kontakt z innymi, współpraca za pośrednictwem narzędzi cyfrowych, interakcja i uczestnictwo w działaniach społecznościowych i sieciach, świadomość międzykulturowa",
+            "background": "comunication.png"
+        },
+        {
+            "title": "Tworzenie treści cyfrowych",
+            "description": "Tworzenie i edytowanie nowych treści; integracja i ponowne przetwarzanie dotychczasowej wiedzy i treści; tworzenie nowych pojęć, treści cyfrowych i programowanie; rozumienie, poszanowanie i stosowanie prawa własności intelektualnej i licencji.",
+            "background": "web-content.jpg"
+        },
+        {
+            "title": "Bezpieczeństwo",
+            "description": "ochrona osobista, ochrona danych, ochrona tożsamości cyfrowej, środki bezpieczeństwa, bezpieczne i zrównoważone użytkowanie",
+            "background": "safety.jpg"
+        },
+        {
+            "title": "Rozwiązywanie problemów",
+            "description": "identyfikacja potrzeb i zasobów cyfrowych, podejmowanie świadomych decyzji, co do wyboru odpowiednich narzędzi cyfrowych w zależności od celów i potrzeb",
+            "background": "problems.png"
+        }
+    ]
+}
