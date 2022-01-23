@@ -6,7 +6,8 @@ interface GridItemProps {
   imageAlt: string;
   heading: string;
   content: string;
-  disabled?: boolean;
+  type?: 'active' | 'disabled' | 'neutral';
+  badgeText?: string;
 }
 
 const GridItem = ({
@@ -14,16 +15,17 @@ const GridItem = ({
   heading,
   content,
   imageAlt,
-  disabled,
+  badgeText,
+  type = 'neutral',
 }: GridItemProps) => (
   <div
     className={`text-center shadow-2xl card ${
-      disabled ? 'grayscale shadow-md' : ''
-    } ${!disabled ? 'border-green-300 border-2' : ''}`}
+      type === 'disabled' ? 'grayscale shadow-md' : ''
+    } ${type === 'active' ? 'border-green-300 border-2' : ''}`}
   >
-    {!disabled && (
+    {type === 'active' && badgeText && (
       <div className="absolute bg-green-300 p-2 right-0 rounded-bl-md">
-        Zdobyto: 20.01.2021
+        {badgeText}
       </div>
     )}
     <figure className="px-10 pt-10">

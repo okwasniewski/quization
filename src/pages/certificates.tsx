@@ -27,9 +27,12 @@ const Certificates = () => (
       {gridData.map(({ imageAlt, imagePath, subtitle, title }, index) => (
         <GridItem
           image={imagePath}
-          disabled={
+          type={
             index === gridData.length - 1 || index === gridData.length - 2
+              ? 'disabled'
+              : 'active'
           }
+          badgeText="Zdobyto: 20.01.2021"
           imageAlt={imageAlt}
           heading={title}
           content={subtitle}
