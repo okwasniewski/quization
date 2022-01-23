@@ -6,10 +6,26 @@ interface GridItemProps {
   imageAlt: string;
   heading: string;
   content: string;
+  disabled?: boolean;
 }
 
-const GridItem = ({ image, heading, content, imageAlt }: GridItemProps) => (
-  <div className="text-center shadow-2xl card">
+const GridItem = ({
+  image,
+  heading,
+  content,
+  imageAlt,
+  disabled,
+}: GridItemProps) => (
+  <div
+    className={`text-center shadow-2xl card ${
+      disabled ? 'grayscale shadow-md' : ''
+    } ${!disabled ? 'border-green-300 border-2' : ''}`}
+  >
+    {!disabled && (
+      <div className="absolute bg-green-300 p-2 right-0 rounded-bl-md">
+        Zdobyto: 20.01.2021
+      </div>
+    )}
     <figure className="px-10 pt-10">
       <Image
         src={image}

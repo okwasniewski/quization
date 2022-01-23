@@ -27,7 +27,11 @@ function SidebarPanel({ children, userName, avatarImage }: SidebarPanelProps) {
         <nav className="flex justify-around md:block" style={{ margin: '0' }}>
           <SidebarLink link="/" image="/panel.svg" name="Panel" />
           <SidebarLink link="/2" image="/scores.svg" name="Wyniki" />
-          <SidebarLink link="/3" image="/certificate.svg" name="Certyfikaty" />
+          <SidebarLink
+            link="/certificates"
+            image="/certificate.svg"
+            name="Certyfikaty"
+          />
           <SidebarLink link="/profile" image="/profile.svg" name="Profil" />
           <SidebarLink link="/5" image="/settings.svg" name="Ustawienia" />
         </nav>
