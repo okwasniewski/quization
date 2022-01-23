@@ -39,7 +39,7 @@ const Home: NextPage = () => {
               placeholder="Hasło"
               onChange={() => {}}
             />
-            <Button onClick={() => router.push('/login')}>Zaloguj się</Button>
+            <Button onClick={() => router.push('/profile')}>Zaloguj się</Button>
             <div
               id="buttons"
               className="flex flex-col xl:justify-between sm:flex-row xl:w-full"

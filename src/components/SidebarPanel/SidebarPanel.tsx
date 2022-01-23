@@ -15,7 +15,7 @@ function SidebarPanel({ children, userName, avatarImage }: SidebarPanelProps) {
         <div className="text-center mb-6 hidden md:block">
           <div>
             <Image
-              src={avatarImage || '/empty-avatar.png'}
+              src={avatarImage || '/sample-avatar.jpeg'}
               alt="avatar"
               width={60}
               height={60}
@@ -28,7 +28,7 @@ function SidebarPanel({ children, userName, avatarImage }: SidebarPanelProps) {
           <SidebarLink link="/" image="/panel.svg" name="Panel" />
           <SidebarLink link="/2" image="/scores.svg" name="Wyniki" />
           <SidebarLink link="/3" image="/certificate.svg" name="Certyfikaty" />
-          <SidebarLink link="/4" image="/profile.svg" name="Profil" />
+          <SidebarLink link="/profile" image="/profile.svg" name="Profil" />
           <SidebarLink link="/5" image="/settings.svg" name="Ustawienia" />
         </nav>
       </div>
