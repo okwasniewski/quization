@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import React from 'react';
 
 interface ProgressBarProps {
@@ -8,7 +9,12 @@ interface ProgressBarProps {
 
 function ProgressBar({ value, maxValue, title }: ProgressBarProps) {
   return (
-    <div className="w-full mt-2 border stats border-base-300">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.4 }}
+      className="w-full mt-2 border stats border-base-300"
+    >
       <div className="stat">
         <div className="stat-value">
           {value}/{maxValue}
@@ -22,7 +28,7 @@ function ProgressBar({ value, maxValue, title }: ProgressBarProps) {
           />
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

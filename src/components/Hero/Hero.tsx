@@ -1,4 +1,5 @@
 import Button from 'components/Button/Button';
+import { motion } from 'framer-motion';
 import { useRouter } from 'next/router';
 import React from 'react';
 
@@ -22,7 +23,17 @@ const Hero = ({
   const router = useRouter();
 
   return (
-    <div
+    <motion.div
+      initial={{
+        y: -20,
+        opacity: 0,
+      }}
+      transition={{ duration: 0.7 }}
+      animate={{
+        y: 0,
+        opacity: 1,
+      }}
+      exit={{ opacity: 0 }}
       className="rounded-3xl h-auto shadow-xl w-auto bg-no-repeat bg-cover items-end flex mb-14"
       style={{
         minHeight: small ? 300 : 500,
@@ -48,7 +59,7 @@ const Hero = ({
           </div>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 };
 

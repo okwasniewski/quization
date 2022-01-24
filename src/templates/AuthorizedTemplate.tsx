@@ -23,7 +23,7 @@ const AuthorizedTemplate: NextPage<AuthorizedTemplateProps> = ({
     </Head>
     <SidebarPanel userName="Jan Kowalski">
       <Header authorized />
-      <div className="container p-10 mx-auto min-h-full">{children}</div>
+      <div className="container px-5 py-3 mx-auto min-h-screen">{children}</div>
       <Footer authorized />
     </SidebarPanel>
   </>
