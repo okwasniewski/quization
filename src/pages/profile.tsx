@@ -2,28 +2,18 @@ import React from 'react';
 import AuthorizedTemplate from 'templates/AuthorizedTemplate';
 import Image from 'next/image';
 import StatsBox from 'components/StatsBox/StatsBox';
+import { motion } from 'framer-motion';
+import Alert from 'components/Alert/Alert';
 
 const Profile = () => (
   <AuthorizedTemplate title="Profil" description="Quization - profil">
-    <div className="alert alert-success">
-      <div className="flex-1">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          className="w-6 h-6 mx-2 stroke-current"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"
-          />
-        </svg>
-        <p>Gratulacje! Idzie ci coraz lepiej</p>
-      </div>
-    </div>
-    <div className="grid grid-cols-1 gap-6 my-8 xl:grid-cols-3 rounded-box">
+    <Alert title="Gratulacje! Idzie ci coraz lepiej" />
+    <motion.div
+      initial={{ x: -50, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      transition={{ duration: 0.9 }}
+      className="grid grid-cols-1 gap-6 my-8 xl:grid-cols-3 rounded-box"
+    >
       <div className="card shadow-lg compact side bg-base-100">
         <div className="flex-row items-center card-body">
           <div>
@@ -71,7 +61,7 @@ const Profile = () => (
         subtitle="Poprawnie rozwiązanych quizów"
         textStyle="text-green-500"
       />
-    </div>
+    </motion.div>
   </AuthorizedTemplate>
 );
 

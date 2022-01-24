@@ -10,8 +10,8 @@ interface SidebarPanelProps {
 
 function SidebarPanel({ children, userName, avatarImage }: SidebarPanelProps) {
   return (
-    <div className="relative z-50 min-h-screen md:flex">
-      <div className="fixed inset-y-0 bottom-0 left-0 top-auto w-screen pt-5 space-y-6 overflow-hidden text-white transform bg-blue-900 pb-7 h-26 md:translate-x-0 md:w-56 md:h-screen md:py-7">
+    <div className="relative min-h-screen md:flex">
+      <div className="fixed z-50 inset-y-0 bottom-0 left-0 top-auto w-screen pt-5 space-y-6 overflow-hidden text-white transform bg-blue-900 pb-7 h-26 md:translate-x-0 md:w-56 md:h-screen md:py-7">
         <div className="hidden mb-6 text-center md:block">
           <div>
             <Image
