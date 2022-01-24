@@ -2,16 +2,16 @@ import React from 'react';
 import AuthorizedTemplate from 'templates/AuthorizedTemplate';
 import GridItem from 'components/GridItem/GridItem';
 import gridData from 'data/front-page-grid.json';
-import { useIntersectionRef } from 'lib/useIntersectionRef';
+import ProgressBar from 'components/ProgressBar/ProgressBar';
 import { motion } from 'framer-motion';
 import { containerVariants } from 'lib/animations';
-import Alert from 'components/Alert/Alert';
+import { useIntersectionRef } from 'lib/useIntersectionRef';
 
-const Certificates = () => {
+const Results = () => {
   const [sectionRef, intersection] = useIntersectionRef();
   return (
     <AuthorizedTemplate title="Profil" description="Quization - profil">
-      <Alert title="Ostatnio zdobyty certyfikat: Informacja i dane" />
+      <ProgressBar value={3} maxValue={5} title="Zaliczone testy" />
       <motion.div
         ref={sectionRef}
         variants={containerVariants}
@@ -19,27 +19,25 @@ const Certificates = () => {
         animate={intersection?.isIntersecting ? 'show' : 'hidden'}
         className="mt-5 grid grid-auto gap-7"
       >
-        {gridData.gridData.map(
-          ({ imageAlt, imagePath, subtitle, title }, index) => (
+        {gridData.gridData.map(({ imageAlt, imagePath, title }, index) => {
+          const completed =
+            index === gridData.gridData.length - 1 ||
+            index === gridData.gridData.length - 2;
+          return (
             <GridItem
               key={index}
               image={imagePath}
-              type={
-                index === gridData.gridData.length - 1 ||
-                index === gridData.gridData.length - 2
-                  ? 'disabled'
-                  : 'active'
-              }
-              badgeText="Zdobyto: 20.01.2021"
+              type={completed ? 'disabled' : 'active'}
+              badgeText="Zaliczone"
               imageAlt={imageAlt}
               heading={title}
-              content={subtitle}
+              content={completed ? 'Nie rozpoczęto' : 'Ocena: 4.5'}
             />
-          )
-        )}
+          );
+        })}
       </motion.div>
     </AuthorizedTemplate>
   );
 };
 
-export default Certificates;
+export default Results;

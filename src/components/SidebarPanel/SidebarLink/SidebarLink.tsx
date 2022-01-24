@@ -15,7 +15,7 @@ function SidebarLink({ link, image, name }: SidebarLinkProps) {
   return (
     <Link href={link}>
       <a
-        className={`flex py-2.5 px-6 align-middle  transition duration-200 hover:bg-blue-800 hover:text-white md:my-1 ${
+        className={`flex py-4 px-6 align-middle  transition duration-200 hover:bg-blue-800 hover:text-white md:my-1 md:py-3 ${
           router.pathname === link ? 'bg-blue-800 text-white' : ''
         }`}
       >

@@ -1,5 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
+import { motion } from 'framer-motion';
+import { itemVariants } from 'lib/animations';
 
 interface GridItemProps {
   image: string;
@@ -18,7 +20,8 @@ const GridItem = ({
   badgeText,
   type = 'neutral',
 }: GridItemProps) => (
-  <div
+  <motion.div
+    variants={itemVariants}
     className={`text-center shadow-2xl card ${
       type === 'disabled' ? 'grayscale shadow-md' : ''
     } ${type === 'active' ? 'border-green-300 border-2' : ''}`}
@@ -41,7 +44,7 @@ const GridItem = ({
       <h2 className="font-bold text- base card-title text-main">{heading}</h2>
       <p className="text-xs">{content}</p>
     </div>
-  </div>
+  </motion.div>
 );
 
 export default GridItem;

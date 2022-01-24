@@ -10,9 +10,9 @@ interface SidebarPanelProps {
 
 function SidebarPanel({ children, userName, avatarImage }: SidebarPanelProps) {
   return (
-    <div className="relative min-h-screen md:flex z-50">
-      <div className="bg-blue-900 text-white fixed w-screen space-y-6 pb-7 pt-5 overflow-hidden h-26 bottom-0 top-auto  inset-y-0 left-0 transform md:translate-x-0 md:w-56 md:h-screen md:py-7">
-        <div className="text-center mb-6 hidden md:block">
+    <div className="relative min-h-screen md:flex">
+      <div className="fixed z-50 inset-y-0 bottom-0 left-0 top-auto w-screen space-y-6 overflow-hidden text-white transform py-0 bg-blue-900 h-26 md:translate-x-0 md:w-56 md:h-screen md:py-7">
+        <div className="hidden mb-6 text-center md:block">
           <div>
             <Image
               src={avatarImage || '/sample-avatar.jpeg'}
@@ -26,7 +26,7 @@ function SidebarPanel({ children, userName, avatarImage }: SidebarPanelProps) {
         </div>
         <nav className="flex justify-around md:block" style={{ margin: '0' }}>
           <SidebarLink link="/panel" image="/panel.svg" name="Panel" />
-          <SidebarLink link="/2" image="/scores.svg" name="Wyniki" />
+          <SidebarLink link="/results" image="/scores.svg" name="Wyniki" />
           <SidebarLink
             link="/certificates"
             image="/certificate.svg"
@@ -41,7 +41,7 @@ function SidebarPanel({ children, userName, avatarImage }: SidebarPanelProps) {
         </nav>
       </div>
 
-      <div className="md:pl-56 flex-1" style={{ backgroundColor: '#F6F5FA' }}>
+      <div className="flex-1 md:pl-56" style={{ backgroundColor: '#F6F5FA' }}>
         {children}
       </div>
     </div>
