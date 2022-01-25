@@ -26,7 +26,10 @@ Produktami projektu są badania kompetencji, oceny kompetencji oraz certyfikaty.
 
 ## 3. Zakresy odpowiedzialności w projekcie
 
-Oskar Kwaśniewski - Główny zarządzający projektem, kreator środowiska pracy, praca nad komponentami Piotr Matyjasik - Praca nad komponentami, opracowanie pytań, przygotowanie treści Adam Łukasiewicz - Praca nad komponentami, opracowanie pytań, przygotowanie treści Konrad Ryczko - Praca nad komponentami, opracowanie pytań, przygotowanie treści
+- Oskar Kwaśniewski - Główny zarządzający projektem, kreator środowiska pracy, praca nad komponentami 
+- Piotr Matyjasik - Praca nad komponentami, opracowanie pytań, przygotowanie treści 
+- Adam Łukasiewicz - Praca nad komponentami, opracowanie pytań, przygotowanie treści 
+- Konrad Ryczko - Praca nad komponentami, opracowanie pytań, przygotowanie treści
 
 Praca wspólna - Wykonanie projektu graficznego, stworzenie zamysłu projektu
 
