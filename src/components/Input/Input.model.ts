@@ -3,5 +3,6 @@ export interface InputProps {
   value: string | number;
   required?: boolean;
   placeholder?: string;
+  error?: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
 }
