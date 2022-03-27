@@ -8,8 +8,17 @@ import LoginSVG from 'assets/Login.svg';
 import { useRouter } from 'next/router';
 import PageTemplate from 'templates/SinglePageTemplate';
 
+import { GoogleLogin, FacebookLogin } from '../firebase';
+
 const Home: NextPage = () => {
   const router = useRouter();
+
+  const handleFacebookLogin = () => {
+    FacebookLogin(() => router.push('/'));
+  };
+  const handleGoogleLogin = () => {
+    GoogleLogin(() => router.push('/'));
+  };
 
   return (
     <UnauthorizedTemplate
@@ -44,7 +53,7 @@ const Home: NextPage = () => {
               id="buttons"
               className="flex flex-col xl:justify-between sm:flex-row xl:w-full"
             >
-              <Button onClick={() => router.push('/login')}>
+              <Button onClick={handleGoogleLogin}>
                 <div className="flex items-center mr-2">
                   <Image
                     src="/Google.svg"
@@ -55,7 +64,7 @@ const Home: NextPage = () => {
                 </div>
                 Google
               </Button>
-              <Button onClick={() => router.push('/login')}>
+              <Button onClick={handleFacebookLogin}>
                 <div className="flex items-center mr-2">
                   <Image
                     src="/Facebook.svg"

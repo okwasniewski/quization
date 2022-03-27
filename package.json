@@ -16,11 +16,13 @@
   },
   "dependencies": {
     "daisyui": "^1.16.1",
+    "firebase": "^9.6.10",
     "framer-motion": "^6.2.1",
     "next": "12.0.5",
     "postcss-loader": "^6.2.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "react-firebase-hooks": "^5.0.3",
     "react-use": "^17.3.2",
     "tailwindcss": "^2.2.19"
   },
