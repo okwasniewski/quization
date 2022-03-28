@@ -6,42 +6,60 @@ import gridData from 'data/front-page-grid.json';
 import { containerVariants } from 'lib/animations';
 import { useIntersectionRef } from 'lib/useIntersectionRef';
 import { motion } from 'framer-motion';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { auth } from '../firebase';
 
 const Home: NextPage = () => {
   const [sectionRef, intersection] = useIntersectionRef();
-  return (
-    <UnauthorizedTemplate
-      title="Strona główna"
-      description="Strona główna Quizaiton"
-    >
-      <Hero
-        backgroundImage="Hero.png"
-        title="Europejskie ramy kompetencji cyfrowych"
-        subtitle={`Kompetencje cyfrowe, obok czytania, pisania, umiejętności matematycznych
+  const [user, loading] = useAuthState(auth);
+  const router = useRouter();
+  useEffect(() => {
+    if (user) {
+      router.push('/profile');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
+  if (loading) {
+    return null;
+  }
+  if (!user) {
+    return (
+      <UnauthorizedTemplate
+        title="Strona główna"
+        description="Strona główna Quizaiton"
+      >
+        <Hero
+          backgroundImage="Hero.png"
+          title="Europejskie ramy kompetencji cyfrowych"
+          subtitle={`Kompetencje cyfrowe, obok czytania, pisania, umiejętności matematycznych
         i językowych, stanowią zespół fundamentalnych umiejętności
         współczesnego człowieka.`}
-      />
-      <motion.div
-        ref={sectionRef}
-        variants={containerVariants}
-        initial="hidden"
-        animate={intersection?.isIntersecting ? 'show' : 'hidden'}
-        className="grid grid-auto gap-7"
-      >
-        {gridData.gridData.map(
-          ({ imageAlt, imagePath, subtitle, title }, index) => (
-            <GridItem
-              key={index}
-              image={imagePath}
-              imageAlt={imageAlt}
-              heading={title}
-              content={subtitle}
-            />
-          )
-        )}
-      </motion.div>
-    </UnauthorizedTemplate>
-  );
+        />
+        <motion.div
+          ref={sectionRef}
+          variants={containerVariants}
+          initial="hidden"
+          animate={intersection?.isIntersecting ? 'show' : 'hidden'}
+          className="grid grid-auto gap-7"
+        >
+          {gridData.gridData.map(
+            ({ imageAlt, imagePath, subtitle, title }, index) => (
+              <GridItem
+                key={index}
+                image={imagePath}
+                imageAlt={imageAlt}
+                heading={title}
+                content={subtitle}
+              />
+            )
+          )}
+        </motion.div>
+      </UnauthorizedTemplate>
+    );
+  }
+  return null;
 };
 
 export default Home;

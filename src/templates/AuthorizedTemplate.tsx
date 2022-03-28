@@ -5,6 +5,7 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { useAuth } from './AuthorizedContext';
 import { auth } from '../firebase';
 
@@ -20,23 +21,24 @@ const AuthorizedTemplate: NextPage<AuthorizedTemplateProps> = ({
   children,
 }: AuthorizedTemplateProps) => {
   const router = useRouter();
-  const { setUser, user } = useAuth();
+  const [user, loading, error] = useAuthState(auth);
 
-  useEffect(() =>
-    auth.onAuthStateChanged((userObj) => {
-      if (userObj) {
-        setUser(userObj);
-      } else {
-        setUser(null);
-        router.push('/login');
-      }
-    })
-  );
   const handleLogout = useCallback(async () => {
     await auth.signOut();
-    setUser(null);
     router.push('/login');
-  }, [setUser, router]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (error || (!user && !loading)) {
+      router.push('/login');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [error, user, loading]);
+
+  if (!user) {
+    return null;
+  }
   return (
     <>
       <Head>
