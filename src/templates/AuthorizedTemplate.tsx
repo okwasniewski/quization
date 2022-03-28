@@ -6,7 +6,6 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { useAuth } from './AuthorizedContext';
 import { auth } from '../firebase';
 
 interface AuthorizedTemplateProps {
