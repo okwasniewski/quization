@@ -1,16 +1,22 @@
 import Button from 'components/Button/Button';
+import Image from 'next/image';
 import React, { useState } from 'react';
+import { QuestionTypeEnum, Answer } from 'types/quiz';
 
 interface QuestionProps {
   question?: string;
   htmlQuestion?: string;
-  questionType: 'input' | 'select' | 'images';
-  options?: string[];
+  questionType: QuestionTypeEnum;
+  handleNext: () => void;
+  handlePickAnswer: (answer: string) => void;
+  options?: Answer[];
 }
 
 function Question({
   question,
-  questionType = 'input',
+  handleNext,
+  handlePickAnswer,
+  questionType = QuestionTypeEnum.RadioSelect,
   htmlQuestion,
   options,
 }: QuestionProps) {
@@ -24,35 +30,52 @@ function Question({
     <div className="max-w-sm overflow-hidden shadow-lg py-8 px-4 bg-white rounded-xl min-w-full text-center my-4">
       <h2 className="font-bold text-2xl mb-6">
         {htmlQuestion ? (
+          // eslint-disable-next-line react/no-danger
           <span dangerouslySetInnerHTML={{ __html: htmlQuestion }} />
         ) : (
           question
         )}
       </h2>
-      {}
-      {(questionType === 'select' || questionType === 'images') &&
-        options?.map((option, index) => (
+      {(questionType === QuestionTypeEnum.RadioSelect ||
+        QuestionTypeEnum.RadioSelectPhotos) &&
+        options?.map(({ PhotoURL, Title }, index) => (
           <div key={index} className="form-control max-w-lg m-auto">
             <label className="cursor-pointer label">
               <span className="label-text">
-                {questionType === 'images' ? (
-                  <img style={{ width: '160px' }} src={option} alt="option" />
+                {questionType === QuestionTypeEnum.RadioSelectPhotos ? (
+                  <Image
+                    width={160}
+                    height={160}
+                    src={
+                      PhotoURL
+                        ? `https://res.cloudinary.com/demo/image/fetch/${PhotoURL}`
+                        : ''
+                    }
+                    alt="option"
+                  />
                 ) : (
-                  option
+                  Title
                 )}
               </span>
               <input
                 type="radio"
                 name="answer"
                 className="radio"
-                value={questionType === 'images' ? index : option}
+                onChange={(event) => {
+                  handlePickAnswer(event.target.value);
+                }}
+                value={
+                  questionType === QuestionTypeEnum.RadioSelectPhotos
+                    ? index
+                    : Title
+                }
               />
             </label>
           </div>
         ))}
 
       <div className="mt-6">
-        <Button onClick={() => {}} center>
+        <Button onClick={handleNext} center>
           Dalej
         </Button>
       </div>
