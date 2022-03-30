@@ -2,17 +2,19 @@ import Hero from 'components/Hero/Hero';
 import GridItem from 'components/GridItem/GridItem';
 import type { NextPage } from 'next';
 import UnauthorizedTemplate from 'templates/UnauthorizedTemplate';
-import gridData from 'data/front-page-grid.json';
-import { containerVariants } from 'lib/animations';
-import { useIntersectionRef } from 'lib/useIntersectionRef';
 import { motion } from 'framer-motion';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { auth } from '../firebase';
+import { collection, DocumentData, getDocs } from 'firebase/firestore';
+import { Quiz } from 'types/quiz';
+import { auth, db } from '../firebase';
 
-const Home: NextPage = () => {
-  const [sectionRef, intersection] = useIntersectionRef();
+interface HomePageProps {
+  quiz: Quiz[] | undefined;
+}
+
+const Home: NextPage<HomePageProps> = ({ quiz }: HomePageProps) => {
   const [user, loading] = useAuthState(auth);
   const router = useRouter();
   useEffect(() => {
@@ -37,24 +39,16 @@ const Home: NextPage = () => {
         i językowych, stanowią zespół fundamentalnych umiejętności
         współczesnego człowieka.`}
         />
-        <motion.div
-          ref={sectionRef}
-          variants={containerVariants}
-          initial="hidden"
-          animate={intersection?.isIntersecting ? 'show' : 'hidden'}
-          className="grid grid-auto gap-7"
-        >
-          {gridData.gridData.map(
-            ({ imageAlt, imagePath, subtitle, title }, index) => (
-              <GridItem
-                key={index}
-                image={imagePath}
-                imageAlt={imageAlt}
-                heading={title}
-                content={subtitle}
-              />
-            )
-          )}
+        <motion.div className="grid grid-auto gap-7">
+          {quiz?.map(({ Description, IconURL, Title }, index) => (
+            <GridItem
+              key={index}
+              image={IconURL}
+              imageAlt="imageAlt"
+              heading={Title}
+              content={Description}
+            />
+          ))}
         </motion.div>
       </UnauthorizedTemplate>
     );
@@ -63,3 +57,17 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+
+export const getServerSideProps = async () => {
+  const quizes = await getDocs(collection(db, 'Quiz'));
+  const quizesList: DocumentData[] = [];
+  quizes.forEach((docs) => {
+    quizesList.push({ ...docs.data(), Id: docs.id });
+  });
+
+  return {
+    props: {
+      quiz: quizesList,
+    },
+  };
+};
