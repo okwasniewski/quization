@@ -15,7 +15,11 @@ function SidebarPanel({ children, userName, avatarImage }: SidebarPanelProps) {
         <div className="hidden mb-6 text-center md:block">
           <div>
             <Image
-              src={avatarImage || '/sample-avatar.jpeg'}
+              src={
+                avatarImage
+                  ? `https://res.cloudinary.com/demo/image/fetch/${avatarImage}`
+                  : '/sample-avatar.jpeg'
+              }
               alt="avatar"
               width={60}
               height={60}

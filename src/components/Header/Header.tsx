@@ -6,9 +6,10 @@ import { useRouter } from 'next/router';
 
 interface HeaderProps {
   authorized: boolean;
+  handleLogout?: () => void;
 }
 
-const Header = ({ authorized }: HeaderProps) => {
+const Header = ({ authorized, handleLogout }: HeaderProps) => {
   const router = useRouter();
   return (
     <div className="navbar items-center shadow-md text-neutral-content bg-white p-3 md:h-20">
@@ -43,6 +44,11 @@ const Header = ({ authorized }: HeaderProps) => {
             </>
           )}
         </div>
+        {authorized && handleLogout && (
+          <Button outline onClick={handleLogout}>
+            Wyloguj się
+          </Button>
+        )}
       </div>
     </div>
   );
