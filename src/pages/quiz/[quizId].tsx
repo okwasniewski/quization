@@ -86,9 +86,20 @@ function SingleQuiz({ questions, quiz }: SingleQuizProps) {
 
 export default SingleQuiz;
 
-export const getServerSideProps = async (ctx: {
-  params: { quizId: string };
-}) => {
+export async function getStaticPaths() {
+  const quizes = await getDocs(collection(db, 'Quiz'));
+  const params = quizes.docs.map((item) => ({
+    params: {
+      quizId: item.id,
+    },
+  }));
+  return {
+    paths: params,
+    fallback: true, // false or 'blocking'
+  };
+}
+
+export const getStaticProps = async (ctx: { params: { quizId: string } }) => {
   const quiz = await getDoc(doc(db, 'Quiz', ctx.params.quizId));
   const questionsQuery = await getDocs(
     collection(db, `Quiz/${ctx.params.quizId}/Question`)
