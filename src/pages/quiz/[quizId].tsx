@@ -8,7 +8,7 @@ import { db } from '../../firebase';
 
 interface SingleQuizProps {
   questions: QuestionTypeArr[];
-  quiz: Quiz;
+  quiz?: Quiz;
 }
 
 function SingleQuiz({ questions, quiz }: SingleQuizProps) {
@@ -19,11 +19,11 @@ function SingleQuiz({ questions, quiz }: SingleQuizProps) {
   >([]);
 
   const correctAnswers = useMemo(
-    () => answers.filter(({ correct }) => correct).length,
+    () => answers.filter(({ correct }) => correct)?.length,
     [answers]
   );
   const handleGoToNextQuestion = () => {
-    if (activeQuestion < questions.length) {
+    if (activeQuestion < questions?.length) {
       setAnswers((prev) => [
         ...prev,
         {
@@ -43,31 +43,32 @@ function SingleQuiz({ questions, quiz }: SingleQuizProps) {
       <Hero
         gradient
         small
-        title={quiz.Title}
-        subtitle={quiz.Description}
-        backgroundImage={quiz.BackgroundURL}
+        title={quiz?.Title || 'Quiz'}
+        subtitle={quiz?.Description || ''}
+        backgroundImage={quiz?.BackgroundURL || ''}
       />
       <div>
-        {questions.map(({ Title, QuestionType, Id, Answers }, index) => {
-          if (activeQuestion !== index) {
-            return null;
-          }
-          return (
-            <Question
-              key={Id}
-              options={Answers}
-              question={Title}
-              handlePickAnswer={(answer) => {
-                setCurrentAnswer(answer);
-              }}
-              questionType={QuestionType}
-              handleNext={handleGoToNextQuestion}
-            />
-          );
-        })}
-        {activeQuestion === questions.length && (
+        {questions &&
+          questions?.map(({ Title, QuestionType, Id, Answers }, index) => {
+            if (activeQuestion !== index) {
+              return null;
+            }
+            return (
+              <Question
+                key={Id}
+                options={Answers}
+                question={Title}
+                handlePickAnswer={(answer) => {
+                  setCurrentAnswer(answer);
+                }}
+                questionType={QuestionType}
+                handleNext={handleGoToNextQuestion}
+              />
+            );
+          })}
+        {activeQuestion === questions?.length && (
           <div className="max-w-sm overflow-hidden shadow-lg py-8 px-4 bg-white rounded-xl min-w-full text-center my-4">
-            {correctAnswers / answers.length < 0.5 ? (
+            {correctAnswers / answers?.length < 0.5 ? (
               <h2 className="text-2xl font-bold">
                 Niestety, nie udalo ci się :(
               </h2>
@@ -105,12 +106,12 @@ export const getStaticProps = async (ctx: { params: { quizId: string } }) => {
     collection(db, `Quiz/${ctx.params.quizId}/Question`)
   );
   const questions = [];
-  for await (const question of questionsQuery.docs) {
+  for (const question of questionsQuery.docs) {
     const answersQuery = await getDocs(
       collection(db, `Quiz/${ctx.params.quizId}/Question/${question.id}/Answer`)
     );
     const Answers = [];
-    for await (const answer of answersQuery.docs) {
+    for (const answer of answersQuery.docs) {
       Answers.push(answer.data());
     }
     questions.push({ ...question.data(), Answers });
