@@ -1,11 +1,16 @@
 import Button from 'components/Button/Button';
-import { addDoc, collection, doc, updateDoc } from 'firebase/firestore';
-import React, { useState } from 'react';
+import { addDoc, collection, doc, getDoc, updateDoc } from 'firebase/firestore';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import AuthorizedTemplate from 'templates/AuthorizedTemplate';
 import { QuestionTypeEnum } from 'types/quiz';
-import { db } from '../firebase';
+import { db, auth } from '../firebase';
 
 export default function Admin() {
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [user] = useAuthState(auth);
+  const router = useRouter();
   const [QuizId, setQuizId] = useState('');
   const [Question, setQuestion] = useState('');
   const [CorrectAnswer, setCorrectAnswer] = useState(0);
@@ -59,6 +64,25 @@ export default function Admin() {
     setAllAnswers(['', '', '', '']);
   };
 
+  useEffect(() => {
+    const checkPermissions = async () => {
+      if (user) {
+        await getDoc(doc(db, 'Users', user.uid)).then((userData) => {
+          const userInfo = userData.data();
+          if (userInfo?.role === 'admin') {
+            setIsLoading(false);
+          } else {
+            router.push('/');
+          }
+        });
+      }
+    };
+    checkPermissions();
+  }, [router, user]);
+
+  if (isLoading) {
+    return null;
+  }
   return (
     <AuthorizedTemplate title="Admin" description="Panel admina">
       <div className="text-center">
@@ -71,7 +95,6 @@ export default function Admin() {
             onChange={(e) => setQuizId(e.target.value)}
             className="input w-full max-w-xs block m-auto mb-2"
           />
-
           <input
             type="text"
             placeholder="Pytanie"
@@ -79,7 +102,6 @@ export default function Admin() {
             onChange={(e) => setQuestion(e.target.value)}
             className="input w-full max-w-xs block m-auto mb-2"
           />
-
           <input
             type="number"
             value={CorrectAnswer}
@@ -89,7 +111,6 @@ export default function Admin() {
             placeholder="Poprawna odpowiedź (string)"
             className="input w-full max-w-xs block m-auto mb-2"
           />
-
           <select
             className="select w-full max-w-xs block m-auto mb-2"
             value={questionType}
