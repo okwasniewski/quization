@@ -15,12 +15,13 @@ export enum QuestionTypeEnum {
 export interface Answer {
   PhotoURL: string | undefined;
   Title: string;
+  Id: string;
 }
 
 export interface Question {
   Id: string;
   Title: string;
-  CorrectAnswer: number;
+  CorrectAnswer: string;
   Answers: Answer[];
   QuestionType: QuestionTypeEnum;
 }

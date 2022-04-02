@@ -28,11 +28,7 @@ function SingleQuiz({ questions, quiz }: SingleQuizProps) {
         ...prev,
         {
           answer: currentAnswer,
-          correct:
-            currentAnswer ===
-            questions[activeQuestion].Answers[
-              questions[activeQuestion].CorrectAnswer
-            ]?.Title,
+          correct: currentAnswer === questions[activeQuestion].CorrectAnswer,
         },
       ]);
       setActiveQuestion(activeQuestion + 1);
@@ -112,7 +108,7 @@ export const getStaticProps = async (ctx: { params: { quizId: string } }) => {
     );
     const Answers = [];
     for (const answer of answersQuery.docs) {
-      Answers.push(answer.data());
+      Answers.push({ ...answer.data(), Id: answer.id });
     }
     questions.push({ ...question.data(), Answers });
   }

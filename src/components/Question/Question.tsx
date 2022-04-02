@@ -21,6 +21,7 @@ function Question({
   options,
 }: QuestionProps) {
   const [inputAnswer, setInputAnser] = useState('');
+  const [isAnswerPicked, setIsAnswerPicked] = useState<boolean>(false);
 
   const inputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputAnser(event.target.value);
@@ -38,7 +39,7 @@ function Question({
       </h2>
       {(questionType === QuestionTypeEnum.RadioSelect ||
         QuestionTypeEnum.RadioSelectPhotos) &&
-        options?.map(({ PhotoURL, Title }, index) => (
+        options?.map(({ PhotoURL, Title, Id }, index) => (
           <div key={index} className="form-control max-w-lg m-auto">
             <label className="cursor-pointer label">
               <span className="label-text">
@@ -61,8 +62,9 @@ function Question({
                 type="radio"
                 name="answer"
                 className="radio"
-                onChange={(event) => {
-                  handlePickAnswer(event.target.value);
+                onChange={() => {
+                  setIsAnswerPicked(true);
+                  handlePickAnswer(Id);
                 }}
                 value={
                   questionType === QuestionTypeEnum.RadioSelectPhotos
@@ -75,7 +77,15 @@ function Question({
         ))}
 
       <div className="mt-6">
-        <Button onClick={handleNext} center>
+        <Button
+          disabled={!isAnswerPicked}
+          onClick={() => {
+            if (isAnswerPicked) {
+              handleNext();
+            }
+          }}
+          center
+        >
           Dalej
         </Button>
       </div>
