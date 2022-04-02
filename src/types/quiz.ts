@@ -25,3 +25,11 @@ export interface Question {
   Answers: Answer[];
   QuestionType: QuestionTypeEnum;
 }
+
+export interface Attempt {
+  FinishDate: Date;
+  Points: number;
+  QuizId: string;
+  isPassed: boolean;
+  ElapsedTime: number;
+}

@@ -1,10 +1,11 @@
 import Hero from 'components/Hero/Hero';
 import Question from 'components/Question/Question';
-import { collection, doc, getDoc, getDocs } from 'firebase/firestore';
-import React, { useMemo, useState } from 'react';
+import { addDoc, collection, doc, getDoc, getDocs } from 'firebase/firestore';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import AuthorizedTemplate from 'templates/AuthorizedTemplate';
-import { Question as QuestionTypeArr, Quiz } from 'types/quiz';
-import { db } from '../../firebase';
+import { Attempt, Question as QuestionTypeArr, Quiz } from 'types/quiz';
+import { db, auth } from '../../firebase';
 
 interface SingleQuizProps {
   questions: QuestionTypeArr[];
@@ -12,6 +13,8 @@ interface SingleQuizProps {
 }
 
 function SingleQuiz({ questions, quiz }: SingleQuizProps) {
+  const [user] = useAuthState(auth);
+  const elapsedTime = useRef(performance.now());
   const [activeQuestion, setActiveQuestion] = useState<number>(0);
   const [currentAnswer, setCurrentAnswer] = useState<string>('');
   const [answers, setAnswers] = useState<
@@ -34,6 +37,31 @@ function SingleQuiz({ questions, quiz }: SingleQuizProps) {
       setActiveQuestion(activeQuestion + 1);
     }
   };
+  const handleSaveAttempt = async () => {
+    if (!quiz || !user) {
+      return;
+    }
+    const userCollection = collection(db, 'Users', user.uid, 'Attempts');
+    let timeDiff = performance.now() - elapsedTime.current;
+    timeDiff /= 1000;
+    const attempt: Attempt = {
+      QuizId: quiz.Id,
+      ElapsedTime: Math.round(timeDiff),
+      FinishDate: new Date(),
+      Points: correctAnswers,
+      isPassed: correctAnswers / questions.length > 0.5,
+    };
+    const res = await addDoc(userCollection, attempt);
+    if (res.id) {
+      alert('Podejście zapisane');
+    }
+  };
+  useEffect(() => {
+    if (activeQuestion === questions.length) {
+      handleSaveAttempt();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeQuestion]);
   return (
     <AuthorizedTemplate title="Quiz" description="Strona quizu">
       <Hero
@@ -63,7 +91,7 @@ function SingleQuiz({ questions, quiz }: SingleQuizProps) {
             );
           })}
         {activeQuestion === questions?.length && (
-          <div className="max-w-sm overflow-hidden shadow-lg py-8 px-4 bg-white rounded-xl min-w-full text-center my-4">
+          <div className="max-w-sm overflow-hidden shadow-lg py-8 px-4 bg-white rounded-xl min-w-full flex flex-col text-center items-center justify-center my-4">
             {correctAnswers / answers?.length < 0.5 ? (
               <h2 className="text-2xl font-bold">
                 Niestety, nie udalo ci się :(
@@ -115,7 +143,7 @@ export const getStaticProps = async (ctx: { params: { quizId: string } }) => {
 
   return {
     props: {
-      quiz: quiz.data(),
+      quiz: { ...quiz.data(), Id: quiz.id },
       questions,
     },
   };
