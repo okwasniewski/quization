@@ -14,7 +14,7 @@ interface SingleQuizProps {
 
 function SingleQuiz({ questions, quiz }: SingleQuizProps) {
   const [user] = useAuthState(auth);
-  const elapsedTime = useRef(performance.now());
+  const elapsedTime = useRef(new Date());
   const [activeQuestion, setActiveQuestion] = useState<number>(0);
   const [currentAnswer, setCurrentAnswer] = useState<string>('');
   const [answers, setAnswers] = useState<
@@ -42,7 +42,7 @@ function SingleQuiz({ questions, quiz }: SingleQuizProps) {
       return;
     }
     const userCollection = collection(db, 'Users', user.uid, 'Attempts');
-    let timeDiff = performance.now() - elapsedTime.current;
+    let timeDiff = new Date().getTime() - elapsedTime.current.getTime();
     timeDiff /= 1000;
     const attempt: Attempt = {
       QuizId: quiz.Id,
