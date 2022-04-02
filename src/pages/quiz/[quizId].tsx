@@ -82,6 +82,7 @@ function SingleQuiz({ questions, quiz }: SingleQuizProps) {
                 key={Id}
                 options={Answers}
                 question={Title}
+                correctAnswer={questions[activeQuestion].CorrectAnswer}
                 handlePickAnswer={(answer) => {
                   setCurrentAnswer(answer);
                 }}

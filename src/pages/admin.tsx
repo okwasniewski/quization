@@ -44,8 +44,10 @@ export default function Admin() {
         const answerData = await addDoc(
           collection(db, 'Quiz', QuizId, 'Question', questionId.id, 'Answer'),
           {
-            Title: answer,
-            PhotoURL: '',
+            Title:
+              questionType !== QuestionTypeEnum.RadioSelectPhotos ? answer : '',
+            PhotoURL:
+              questionType === QuestionTypeEnum.RadioSelectPhotos ? answer : '',
           }
         );
         if (index === CorrectAnswer) {
