@@ -1,0 +1,127 @@
+import Button from 'components/Button/Button';
+import { addDoc, collection, doc, updateDoc } from 'firebase/firestore';
+import React, { useState } from 'react';
+import AuthorizedTemplate from 'templates/AuthorizedTemplate';
+import { QuestionTypeEnum } from 'types/quiz';
+import { db } from '../firebase';
+
+export default function Admin() {
+  const [QuizId, setQuizId] = useState('');
+  const [Question, setQuestion] = useState('');
+  const [CorrectAnswer, setCorrectAnswer] = useState(0);
+  const [questionType, setQuestionType] = useState<QuestionTypeEnum>(0);
+  const [allAnswers, setAllAnswers] = useState<string[]>(['', '', '', '']);
+
+  const updateAnswers = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => {
+    const newAnswers = [...allAnswers];
+    newAnswers[index] = e.target.value;
+    setAllAnswers(newAnswers);
+  };
+
+  const handleSubmit = async () => {
+    const questionId = await addDoc(
+      collection(db, 'Quiz', QuizId, 'Question'),
+      {
+        Title: Question,
+        CorrectAnswer,
+        QuestionType: questionType,
+      }
+    );
+
+    let correctAnswerId = '';
+
+    allAnswers
+      .filter((answer) => answer.trim() !== '')
+      .forEach(async (answer, index) => {
+        const answerData = await addDoc(
+          collection(db, 'Quiz', QuizId, 'Question', questionId.id, 'Answer'),
+          {
+            Title: answer,
+            PhotoURL: '',
+          }
+        );
+        if (index === CorrectAnswer) {
+          correctAnswerId = answerData.id;
+          await updateDoc(doc(db, 'Quiz', QuizId, 'Question', questionId.id), {
+            CorrectAnswer: correctAnswerId,
+          });
+        }
+      });
+  };
+
+  const clearForm = () => {
+    setQuestion('');
+    setCorrectAnswer(0);
+    setQuestionType(0);
+    setAllAnswers(['', '', '', '']);
+  };
+
+  return (
+    <AuthorizedTemplate title="Admin" description="Panel admina">
+      <div className="text-center">
+        <h1 className="font-semibold text-2xl py-5">Dodaj pytanie</h1>
+        <div className="grid grid-cols-1 max-w-2xl mx-auto md:grid-cols-2">
+          <input
+            type="text"
+            placeholder="Quiz ID"
+            value={QuizId}
+            onChange={(e) => setQuizId(e.target.value)}
+            className="input w-full max-w-xs block m-auto mb-2"
+          />
+
+          <input
+            type="text"
+            placeholder="Pytanie"
+            value={Question}
+            onChange={(e) => setQuestion(e.target.value)}
+            className="input w-full max-w-xs block m-auto mb-2"
+          />
+
+          <input
+            type="number"
+            value={CorrectAnswer}
+            max={3}
+            min={0}
+            onChange={(e) => setCorrectAnswer(+e.target.value)}
+            placeholder="Poprawna odpowiedź (string)"
+            className="input w-full max-w-xs block m-auto mb-2"
+          />
+
+          <select
+            className="select w-full max-w-xs block m-auto mb-2"
+            value={questionType}
+            onChange={(e) => setQuestionType(Number(e.target.value))}
+          >
+            {Object.values(QuestionTypeEnum)
+              .filter((el) => typeof el === 'number')
+              .map((key) => (
+                <option key={key} value={key}>
+                  {QuestionTypeEnum[+key]}
+                </option>
+              ))}
+          </select>
+
+          {allAnswers.map((answer, index) => (
+            <input
+              key={index}
+              type="text"
+              value={answer}
+              onChange={(e) => updateAnswers(e, index)}
+              placeholder={`Odpowiedź ${index + 1}`}
+              className="input w-full max-w-xs block m-auto mb-2"
+            />
+          ))}
+        </div>
+        <div className="flex flex-wrap justify-center mt-6">
+          <Button outline onClick={clearForm}>
+            Wyczyść
+          </Button>
+          <Button onClick={handleSubmit}>Dodaj</Button>
+        </div>
+      </div>
+    </AuthorizedTemplate>
+  );
+}
