@@ -26,44 +26,58 @@ export default function Admin() {
     setAllAnswers(newAnswers);
   };
 
-  const handleSubmit = async () => {
-    const questionId = await addDoc(
-      collection(db, 'Quiz', QuizId, 'Question'),
-      {
-        Title: Question,
-        CorrectAnswer,
-        QuestionType: questionType,
-      }
-    );
-
-    let correctAnswerId = '';
-
-    allAnswers
-      .filter((answer) => answer.trim() !== '')
-      .forEach(async (answer, index) => {
-        const answerData = await addDoc(
-          collection(db, 'Quiz', QuizId, 'Question', questionId.id, 'Answer'),
-          {
-            Title:
-              questionType !== QuestionTypeEnum.RadioSelectPhotos ? answer : '',
-            PhotoURL:
-              questionType === QuestionTypeEnum.RadioSelectPhotos ? answer : '',
-          }
-        );
-        if (index === CorrectAnswer) {
-          correctAnswerId = answerData.id;
-          await updateDoc(doc(db, 'Quiz', QuizId, 'Question', questionId.id), {
-            CorrectAnswer: correctAnswerId,
-          });
-        }
-      });
-  };
-
   const clearForm = () => {
     setQuestion('');
     setCorrectAnswer(0);
     setQuestionType(0);
     setAllAnswers(['', '', '', '']);
+  };
+
+  const handleSubmit = async () => {
+    try {
+      const questionId = await addDoc(
+        collection(db, 'Quiz', QuizId, 'Question'),
+        {
+          Title: Question,
+          CorrectAnswer,
+          QuestionType: questionType,
+        }
+      );
+
+      let correctAnswerId = '';
+
+      allAnswers
+        .filter((answer) => answer.trim() !== '')
+        .forEach(async (answer, index) => {
+          const answerData = await addDoc(
+            collection(db, 'Quiz', QuizId, 'Question', questionId.id, 'Answer'),
+            {
+              Title:
+                questionType !== QuestionTypeEnum.RadioSelectPhotos
+                  ? answer
+                  : '',
+              PhotoURL:
+                questionType === QuestionTypeEnum.RadioSelectPhotos
+                  ? answer
+                  : '',
+            }
+          );
+          if (index === CorrectAnswer) {
+            correctAnswerId = answerData.id;
+            await updateDoc(
+              doc(db, 'Quiz', QuizId, 'Question', questionId.id),
+              {
+                CorrectAnswer: correctAnswerId,
+              }
+            );
+          }
+        });
+
+      alert('Dodano pytanie');
+      clearForm();
+    } catch (error) {
+      alert('Błąd');
+    }
   };
 
   useEffect(() => {
