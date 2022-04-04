@@ -3,6 +3,7 @@ import { addDoc, collection, doc, getDoc, updateDoc } from 'firebase/firestore';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import toast from 'react-hot-toast';
 import AuthorizedTemplate from 'templates/AuthorizedTemplate';
 import { QuestionTypeEnum } from 'types/quiz';
 import { db, auth } from '../firebase';
@@ -73,10 +74,10 @@ export default function Admin() {
           }
         });
 
-      alert('Dodano pytanie');
+      toast.success('Dodano pytanie');
       clearForm();
     } catch (error) {
-      alert('Błąd');
+      toast.error('Wystąpił, bład');
     }
   };
 
