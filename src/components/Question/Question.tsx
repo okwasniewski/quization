@@ -49,7 +49,7 @@ function Question({
         options?.map(({ PhotoURL, Title, Id }, index) => (
           <div key={index} className="form-control max-w-lg m-auto">
             <label className="cursor-pointer label">
-              <span className="label-text">
+              <span className="label-text text-left">
                 {questionType === QuestionTypeEnum.RadioSelectPhotos ? (
                   <Image
                     width={160}
@@ -65,20 +65,22 @@ function Question({
                   Title
                 )}
               </span>
-              <input
-                type="radio"
-                name="answer"
-                className="radio"
-                onChange={() => {
-                  setIsAnswerPicked(true);
-                  handlePickAnswer(Id);
-                }}
-                value={
-                  questionType === QuestionTypeEnum.RadioSelectPhotos
-                    ? index
-                    : Title
-                }
-              />
+              <div className="ml-4">
+                <input
+                  type="radio"
+                  name="answer"
+                  className="radio !min-w-[20px] !min-h-[20px]"
+                  onChange={() => {
+                    setIsAnswerPicked(true);
+                    handlePickAnswer(Id);
+                  }}
+                  value={
+                    questionType === QuestionTypeEnum.RadioSelectPhotos
+                      ? index
+                      : Title
+                  }
+                />
+              </div>
             </label>
           </div>
         ))}
