@@ -72,20 +72,20 @@ const Home: NextPage = () => {
             onSubmit={onSubmit}
             validationSchema={LoginSchema}
           >
-            {({ values, errors, handleChange, handleSubmit }) => (
+            {({ values, errors, handleChange, handleSubmit, touched }) => (
               <Form className="flex flex-col">
                 <Input
                   type="text"
                   value={values.email}
                   required
-                  error={errors.email}
+                  error={touched.email ? errors.email : undefined}
                   placeholder="Adres e-mail"
                   onChange={handleChange('email')}
                 />
                 <Input
                   type="password"
                   value={values.password}
-                  error={errors.password}
+                  error={touched.password ? errors.password : undefined}
                   required
                   placeholder="Hasło"
                   onChange={handleChange('password')}
