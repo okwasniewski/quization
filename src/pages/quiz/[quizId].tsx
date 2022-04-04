@@ -8,6 +8,7 @@ import AuthorizedTemplate from 'templates/AuthorizedTemplate';
 import { Attempt, Question as QuestionTypeArr, Quiz } from 'types/quiz';
 import Button from 'components/Button/Button';
 import { Router, useRouter } from 'next/router';
+import toast from 'react-hot-toast';
 import { db, auth } from '../../firebase';
 
 interface SingleQuizProps {
@@ -58,7 +59,7 @@ function SingleQuiz({ questions, quiz }: SingleQuizProps) {
     };
     const res = await addDoc(userCollection, attempt);
     if (res.id) {
-      alert('Podejście zapisane');
+      toast.success('Podejście zapisane');
     }
   };
 
