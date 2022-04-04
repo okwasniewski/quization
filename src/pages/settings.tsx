@@ -1,36 +1,63 @@
-import React, { useState } from 'react';
+import React from 'react';
+import toast from 'react-hot-toast';
 import AuthorizedTemplate from 'templates/AuthorizedTemplate';
+import {
+  EmailAuthProvider,
+  FacebookAuthProvider,
+  GoogleAuthProvider,
+  reauthenticateWithCredential,
+  reauthenticateWithPopup,
+} from 'firebase/auth';
+import { useRouter } from 'next/router';
+import { deleteDoc, doc } from 'firebase/firestore';
+import { auth, db } from '../firebase';
 
 function Settings() {
-  const [isChecked, setIsChecked] = useState(false);
+  const router = useRouter();
+  const deleteAccount = async () => {
+    const { currentUser } = auth;
+    // Get the first provider only
+    const userProvider = currentUser?.providerData[0].providerId;
+    if (!currentUser) {
+      toast.error('Something went wrong');
+      return;
+    }
+    const AuthProvider =
+      userProvider === 'google.com' ? GoogleAuthProvider : FacebookAuthProvider;
+    try {
+      let response = null;
 
-  const handleChange = () => {
-    setIsChecked(!isChecked);
+      if (userProvider === 'password') {
+        const password = prompt('Podaj hasło');
+        const credentials = EmailAuthProvider.credential(
+          currentUser?.email || '',
+          password || ''
+        );
+        response = await reauthenticateWithCredential(currentUser, credentials);
+      } else {
+        response = await reauthenticateWithPopup(
+          currentUser,
+          new AuthProvider()
+        );
+      }
+
+      if (response) {
+        await deleteDoc(doc(db, `Users/${currentUser.uid}`));
+        currentUser.delete();
+        router.push('/');
+      }
+    } catch (e) {
+      toast.error('Coś poszło nie tak.');
+    }
   };
-
   return (
     <AuthorizedTemplate title="Ustawienia" description="Strona ustawień">
-      <div className="p-6 card bordered max-w-sm m-auto">
-        <div className="form-control">
-          <label className="cursor-pointer label">
-            <span className="label-text text-xl font-normal">
-              Powiadomienia
-            </span>
-            <input
-              type="checkbox"
-              checked={isChecked}
-              onChange={handleChange}
-              className="toggle"
-            />
-          </label>
-        </div>
-      </div>
       <div className="text-center">
         <button type="button" className="btn btn-primary m-2">
-          zresetuj postęp
+          Zresetuj postęp
         </button>
-        <button type="button" className="btn m-2">
-          usuń konto
+        <button type="button" className="btn m-2" onClick={deleteAccount}>
+          Usuń konto
         </button>
       </div>
     </AuthorizedTemplate>
