@@ -2,10 +2,8 @@ import React from 'react';
 import toast from 'react-hot-toast';
 import AuthorizedTemplate from 'templates/AuthorizedTemplate';
 import {
-  EmailAuthProvider,
   FacebookAuthProvider,
   GoogleAuthProvider,
-  reauthenticateWithCredential,
   reauthenticateWithPopup,
 } from 'firebase/auth';
 import { useRouter } from 'next/router';
@@ -22,24 +20,16 @@ function Settings() {
       toast.error('Something went wrong');
       return;
     }
+    if (userProvider === 'password') {
+      toast.error('Something went wrong');
+    }
     const AuthProvider =
       userProvider === 'google.com' ? GoogleAuthProvider : FacebookAuthProvider;
     try {
-      let response = null;
-
-      if (userProvider === 'password') {
-        const password = prompt('Podaj hasło');
-        const credentials = EmailAuthProvider.credential(
-          currentUser?.email || '',
-          password || ''
-        );
-        response = await reauthenticateWithCredential(currentUser, credentials);
-      } else {
-        response = await reauthenticateWithPopup(
-          currentUser,
-          new AuthProvider()
-        );
-      }
+      const response = await reauthenticateWithPopup(
+        currentUser,
+        new AuthProvider()
+      );
 
       if (response) {
         await deleteDoc(doc(db, `Users/${currentUser.uid}`));
@@ -50,12 +40,11 @@ function Settings() {
       toast.error('Coś poszło nie tak.');
     }
   };
+
   return (
     <AuthorizedTemplate title="Ustawienia" description="Strona ustawień">
+      <h1 className="text-xl font-semibold mt-2">Ustawienia konta</h1>
       <div className="text-center">
-        <button type="button" className="btn btn-primary m-2">
-          Zresetuj postęp
-        </button>
         <button type="button" className="btn m-2" onClick={deleteAccount}>
           Usuń konto
         </button>
