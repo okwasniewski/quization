@@ -1,17 +1,62 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import AuthorizedTemplate from 'templates/AuthorizedTemplate';
 import Image from 'next/image';
 import StatsBox from 'components/StatsBox/StatsBox';
 import { motion } from 'framer-motion';
 import Alert from 'components/Alert/Alert';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth } from '../firebase';
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  limit,
+  orderBy,
+  query,
+} from 'firebase/firestore';
+import { Quiz } from 'types/quiz';
+import { auth, db } from '../firebase';
 
 const Profile = () => {
   const [user, , error] = useAuthState(auth);
+  const [attemptsCount, setAttemptsCount] = useState<string>('-');
+  const [pointsEarned, setPointsEarned] = useState<string>('-');
+  const [elapsedTime, setElapsedTime] = useState<string>('-');
+  const [lastQuiz, setLastQuiz] = useState<Quiz>();
+  useEffect(() => {
+    const getData = async () => {
+      if (!user) {
+        return;
+      }
+      const attempts = collection(db, `Users/${user.uid}/Attempts`);
+      const attemptsResponse = await getDocs(attempts);
+      let timeInSeconds = 0;
+      let points = 0;
+      attemptsResponse.forEach((attempt) => {
+        points += attempt.data().Points;
+        timeInSeconds += attempt.data().ElapsedTime;
+      });
+      const lastAttempt = query(
+        attempts,
+        orderBy('FinishDate', 'desc'),
+        limit(1)
+      );
+      const lastAttemptResponse = await getDocs(lastAttempt);
+      lastAttemptResponse.forEach(async (result) => {
+        const quiz = await getDoc(doc(db, 'Quiz', result.data().QuizId));
+        setLastQuiz(quiz.data() as Quiz);
+      });
+      setAttemptsCount(attemptsResponse.size.toString());
+      setElapsedTime((timeInSeconds / 60).toFixed(2));
+      setPointsEarned(points.toString());
+    };
+    getData();
+  }, [user]);
+
   if (error) {
     return <h1>Coś poszło nie tak</h1>;
   }
+
   return (
     <AuthorizedTemplate title="Profil" description="Quization - profil">
       <Alert title="Gratulacje! Idzie ci coraz lepiej" />
@@ -45,31 +90,31 @@ const Profile = () => {
             </div>
           </div>
         </div>
-        <StatsBox title="75%" subtitle="Ukończonych quizów" />
+        <StatsBox title={attemptsCount} subtitle="Ukończonych podejść" />
         <div className="card row-span-2 shadow-lg compact bg-base-100">
           <Image
-            src="/information.svg"
+            src={lastQuiz?.IconURL || '/information.svg'}
             alt="Informacja i dane"
             width={200}
             height={150}
           />
           <div className="flex-row items-center space-x-4 card-body">
             <div>
-              <h2 className="card-title">Kontynuuj ostatni quiz</h2>
+              <h2 className="card-title">Ostatnio rozwiązywany quiz</h2>
               <p className="text-base-content text-opacity-40">
-                Informacja i dane
+                {lastQuiz?.Title}
               </p>
             </div>
           </div>
         </div>
         <StatsBox
-          title="90%"
-          subtitle="Poprawnych odpowiedzi"
+          title={pointsEarned}
+          subtitle="Zdobytych punktów"
           textStyle="text-green-500"
         />
         <StatsBox
-          title="6"
-          subtitle="Poprawnie rozwiązanych quizów"
+          title={elapsedTime}
+          subtitle="Minut nauki"
           textStyle="text-green-500"
         />
       </motion.div>

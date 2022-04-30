@@ -7,7 +7,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import AuthorizedTemplate from 'templates/AuthorizedTemplate';
 import { Attempt, Question as QuestionTypeArr, Quiz } from 'types/quiz';
 import Button from 'components/Button/Button';
-import { Router, useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import toast from 'react-hot-toast';
 import { db, auth } from '../../firebase';
 
