@@ -5,9 +5,15 @@ import ProgressBar from 'components/ProgressBar/ProgressBar';
 import { motion } from 'framer-motion';
 import { containerVariants } from 'lib/animations';
 import { useIntersectionRef } from 'lib/useIntersectionRef';
-import { collection, DocumentData, getDocs } from 'firebase/firestore';
+import {
+  collection,
+  DocumentData,
+  getDocs,
+  Timestamp,
+} from 'firebase/firestore';
 import { Quiz } from 'types/quiz';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { formatFirebaseDateWithoutHours } from 'helpers/FormatFireBaseDate';
 import { auth, db } from '../firebase';
 
 interface PanelProps {
@@ -20,6 +26,7 @@ interface Result {
   IconURL: string;
   Id: string;
   completed?: boolean;
+  FinishDate?: Timestamp;
 }
 
 interface Attempt {
@@ -27,6 +34,7 @@ interface Attempt {
   Points: number;
   QuizId: string;
   isPassed: boolean;
+  FinishDate: Timestamp;
 }
 
 const Results = ({ quiz }: PanelProps) => {
@@ -45,7 +53,6 @@ const Results = ({ quiz }: PanelProps) => {
         attemptsList.push({ ...docs.data(), Id: docs.id });
       });
       attemptsList = attemptsList.filter((attempt) => attempt.isPassed);
-
       const activeResults: Result[] = quiz ? [...quiz] : [];
 
       attemptsList.forEach((attempt) => {
@@ -55,6 +62,7 @@ const Results = ({ quiz }: PanelProps) => {
           .indexOf(activeAttempt.QuizId);
         if (quizIndex !== -1 && !activeResults[quizIndex].completed) {
           activeResults[quizIndex].completed = activeAttempt.isPassed;
+          activeResults[quizIndex].FinishDate = activeAttempt.FinishDate;
         }
       });
 
@@ -64,6 +72,7 @@ const Results = ({ quiz }: PanelProps) => {
 
   useEffect(() => {
     loadAttempts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -78,19 +87,24 @@ const Results = ({ quiz }: PanelProps) => {
         variants={containerVariants}
         initial="hidden"
         animate={intersection?.isIntersecting ? 'show' : 'hidden'}
-        className="mt-5 grid grid-auto gap-7"
+        className="grid mt-5 grid-auto gap-7"
       >
-        {results.map(({ Id, IconURL, Title, completed }) => (
-          <GridItem
-            key={Id}
-            image={IconURL}
-            imageAlt={Title}
-            heading={Title}
-            content={completed ? 'Ukończono' : 'Nie ukończono'}
-            badgeText="Zaliczone"
-            type={completed ? 'active' : 'disabled'}
-          />
-        ))}
+        {results.map(({ Id, IconURL, Title, completed, FinishDate }) => {
+          const formatedDate = FinishDate
+            ? formatFirebaseDateWithoutHours(FinishDate)
+            : '';
+          return (
+            <GridItem
+              key={Id}
+              image={IconURL}
+              imageAlt={Title}
+              heading={Title}
+              content={completed ? 'Ukończono' : 'Nie ukończono'}
+              badgeText={`Ukończono: ${formatedDate}`}
+              type={completed ? 'active' : 'disabled'}
+            />
+          );
+        })}
       </motion.div>
     </AuthorizedTemplate>
   );
