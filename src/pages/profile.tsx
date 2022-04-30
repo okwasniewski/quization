@@ -29,10 +29,10 @@ const Profile = () => {
         return;
       }
       const attempts = collection(db, `Users/${user.uid}/Attempts`);
-      const data = await getDocs(attempts);
+      const attemptsResponse = await getDocs(attempts);
       let timeInSeconds = 0;
       let points = 0;
-      data.forEach((attempt) => {
+      attemptsResponse.forEach((attempt) => {
         points += attempt.data().Points;
         timeInSeconds += attempt.data().ElapsedTime;
       });
@@ -41,12 +41,12 @@ const Profile = () => {
         orderBy('FinishDate', 'desc'),
         limit(1)
       );
-      const res1 = await getDocs(lastAttempt);
-      res1.forEach(async (result) => {
+      const lastAttemptResponse = await getDocs(lastAttempt);
+      lastAttemptResponse.forEach(async (result) => {
         const quiz = await getDoc(doc(db, 'Quiz', result.data().QuizId));
         setLastQuiz(quiz.data() as Quiz);
       });
-      setAttemptsCount(data.size.toString());
+      setAttemptsCount(attemptsResponse.size.toString());
       setElapsedTime((timeInSeconds / 60).toFixed(2));
       setPointsEarned(points.toString());
     };
