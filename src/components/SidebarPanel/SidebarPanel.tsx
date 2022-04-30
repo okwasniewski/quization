@@ -11,7 +11,7 @@ interface SidebarPanelProps {
 function SidebarPanel({ children, userName, avatarImage }: SidebarPanelProps) {
   return (
     <div className="relative min-h-screen md:flex">
-      <div className="fixed z-50 inset-y-0 bottom-0 left-0 top-auto w-screen space-y-6 overflow-hidden text-white transform py-0 bg-blue-900 h-26 md:translate-x-0 md:w-56 md:h-screen md:py-7">
+      <div className="fixed inset-y-0 bottom-0 left-0 top-auto z-50 w-screen py-0 space-y-6 overflow-hidden text-white transform bg-blue-900 h-26 md:translate-x-0 md:w-56 md:h-screen md:py-7">
         <div className="hidden mb-6 text-center md:block">
           <div>
             <Image
@@ -31,11 +31,6 @@ function SidebarPanel({ children, userName, avatarImage }: SidebarPanelProps) {
         <nav className="flex justify-around md:block" style={{ margin: '0' }}>
           <SidebarLink link="/panel" image="/panel.svg" name="Panel" />
           <SidebarLink link="/results" image="/scores.svg" name="Wyniki" />
-          <SidebarLink
-            link="/certificates"
-            image="/certificate.svg"
-            name="Certyfikaty"
-          />
           <SidebarLink link="/profile" image="/profile.svg" name="Profil" />
           <SidebarLink
             link="/settings"
