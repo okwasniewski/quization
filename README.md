@@ -39,6 +39,9 @@ Praca wspólna - Wykonanie projektu graficznego, stworzenie zamysłu projektu
 | ---------- | -------------------------------------------------- | ---------- |
 | 10.12.2021 | Opracowanie widoku dla użytkownika niezalogowanego | Cała grupa |
 | 12.01.2021 | Opracowanie widoku dla użytkownika zalogowanego    | Cała grupa |
+| 01.02.2022 | Połączenie aplikacji z bazą danych  | Cała grupa |
+| 20.04.2022 | Wdrożenie i opracowanie logiki biznesowej    | Cała grupa |
+
 
 ## 5. Role członków zespołu projektowego
 
